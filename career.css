@@ -43,3 +43,23 @@
 .link-security{padding:27px}.link-security h2{margin:9px 0 13px;font:900 34px/.95 'Barlow Condensed',sans-serif;text-transform:uppercase}.link-security>p{font-size:12px;line-height:1.7}.link-security code{display:inline-block;padding:2px 6px;background:#d8ff3e12;color:var(--acid);font-family:'IBM Plex Mono',monospace}.link-security dl{margin:24px 0 0}.link-security dl div{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-top:1px solid var(--line)}.link-security dt{color:#788596;font:700 9px 'IBM Plex Mono',monospace}.link-security dd{margin:0;color:#dce3eb;font:800 13px 'Barlow Condensed',sans-serif}
 @media(max-width:1050px){.link-download-hero{grid-template-columns:1fr minmax(240px,.45fr)}.link-install-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.link-download-hero,.link-info-layout{grid-template-columns:1fr}.link-download-hero{padding:30px 22px}.link-download-copy h2{font-size:clamp(40px,13vw,62px)}.link-app-card{min-height:240px}.link-install-grid{grid-template-columns:1fr}.link-install-grid article{min-height:0}.link-download-primary{min-width:100%}}
+
+
+/* Compact desktop sidebar for FHD-height viewports */
+@media (min-width:1181px) and (max-height:1000px){
+  .sidebar{padding:16px 12px 12px}
+  .brand{padding:0 8px 16px}
+  .primary-nav{flex:0 0 auto;gap:1px}
+  .nav-label{margin:0 12px 4px}
+  .nav-label-secondary{margin-top:2px}
+  .nav-item{height:36px;padding-inline:10px}
+  .link-monitor{width:calc(100% - 16px);margin:8px 8px 10px;padding:9px 10px;gap:8px}
+  .link-monitor strong{margin:2px 0;font-size:13px}
+  .link-monitor em{display:none}
+  .season-progress{margin:0 8px 10px;padding:12px}
+  .season-progress p{margin:8px 0 6px}
+  .driver-card{padding-top:10px}
+}
+@media (min-width:1181px) and (max-height:760px){
+  .season-progress{display:none}
+}

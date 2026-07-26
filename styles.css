@@ -34,13 +34,25 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--acid); outline-
   position: fixed;
   inset: 0 auto 0 0;
   z-index: 5;
+  box-sizing: border-box;
   width: 238px;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   padding: 24px 16px 18px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #313b46 transparent;
   border-right: 1px solid #222a33;
   background: #0d1116;
 }
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-thumb { border-radius: 6px; background: #313b46; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
 
 .brand {
   display: flex;
