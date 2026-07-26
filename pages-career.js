@@ -13,13 +13,13 @@ window.FBR_PAGES.link=({esc})=>{
       <h2>ONE SMALL APP.<br>THE WHOLE PADDOCK CONNECTED.</h2>
       <p>FlyByRace Link starts AMS2 Dedicated Server sessions, resolves installed content and returns protected room credentials to this career.</p>
       <div class="link-download-actions">
-        <a class="link-download-primary" href="./downloads/FlyByRace-Link-Setup.exe" download>DOWNLOAD LINK v0.6.2 <span>↓</span></a>
+        <a class="link-download-primary" href="./downloads/FlyByRace-Link-Setup.exe" download>DOWNLOAD LINK v0.6.3 <span>↓</span></a>
         <small>WINDOWS x64 · 252 KB · NATIVE WPF · NO ELECTRON · AD-FREE</small>
       </div>
     </div>
     <div class="link-app-card">
       <img src="./icon-192.png" alt="" width="96" height="96">
-      <span>FLYBYRACE LINK</span><strong>v0.6.2</strong>
+      <span>FLYBYRACE LINK</span><strong>v0.6.3</strong>
       <div class="link-download-status ${mode}" id="link-download-status"><i></i><p><strong>${esc(status.title)}</strong><span>${esc(status.detail)}</span></p></div>
     </div>
   </section>
