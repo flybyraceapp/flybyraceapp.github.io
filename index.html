@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="FlyByRace — the unofficial Automobilista 2 driver career">
+  <title>FlyByRace — Driver Career</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./career.css">
+  <link rel="stylesheet" href="./onboarding.css">
+  <script src="./data/catalog.js" defer></script>
+  <script src="./data/career-content.js" defer></script>
+  <script src="./data/career-rules.js" defer></script>
+  <script src="./career-engine.js" defer></script>
+  <script src="./firebase-service.js" defer></script>
+  <script src="./pages-main.js" defer></script>
+  <script src="./pages-career.js" defer></script>
+  <script src="./onboarding.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body class="intro-pending">
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#overview" data-route="overview" aria-label="FlyByRace home">
+      <span class="brand-mark">F</span><span class="brand-type"><strong>FLYBYRACE</strong><small>DRIVER CAREER</small></span>
+    </a>
+    <nav class="primary-nav" aria-label="Career navigation">
+      <p class="nav-label">CAREER</p>
+      <button class="nav-item active" data-route="overview"><i>◫</i><span>Overview</span></button>
+      <button class="nav-item" data-route="inbox"><i>✉</i><span>Inbox</span><em id="inbox-badge">3</em></button>
+      <button class="nav-item" data-route="calendar"><i>▦</i><span>Calendar</span></button>
+      <button class="nav-item" data-route="competitions"><i>⚑</i><span>Competitions</span></button>
+      <button class="nav-item" data-route="teams"><i>♜</i><span>Teams</span></button>
+      <button class="nav-item" data-route="sponsors"><i>◆</i><span>Sponsors</span></button>
+      <button class="nav-item" data-route="garage"><i>⚙</i><span>Garage</span></button>
+      <button class="nav-item" data-route="driver"><i>◉</i><span>Driver</span></button>
+      <button class="nav-item" data-route="records"><i>◇</i><span>Records</span></button>
+      <p class="nav-label nav-label-secondary">SYSTEM</p>
+      <button class="nav-item" data-route="content"><i>▤</i><span>Game Content</span></button>
+      <button class="nav-item" data-route="settings"><i>⌁</i><span>Settings</span></button>
+    </nav>
+    <button class="link-monitor offline" id="link-monitor" type="button">
+      <span class="link-monitor-light"></span>
+      <span><small>COMPANION STATUS</small><strong id="link-monitor-title">LINK APP NOT RUNNING</strong><em id="link-monitor-detail">Start FlyByRace Link for live game and telemetry connection.</em></span>
+      <b>›</b>
+    </button>
+    <section class="season-progress">
+      <div><span id="season-label">ROOKIE SEASON</span><strong id="season-percent">12%</strong></div>
+      <p><span id="season-bar"></span></p><small id="season-week">Week 3 of 24</small>
+    </section>
+    <section class="driver-card">
+      <div class="driver-avatar" id="driver-initials">YK</div>
+      <div><strong id="driver-name">Young Kim</strong><span id="driver-team">Independent driver</span></div>
+      <button type="button" data-route="settings" aria-label="Profile settings">•••</button>
+    </section>
+  </aside>
+
+  <main class="workspace">
+    <header class="topbar">
+      <div class="breadcrumb"><span>CAREER</span><b>/</b><strong id="breadcrumb-page">OVERVIEW</strong></div>
+      <div class="topbar-actions">
+        <button class="account-pill" id="account-button"><span>G</span><b>LOCAL CAREER</b></button>
+        <button class="link-pill offline" id="link-pill"><span></span><b id="link-label">LINK OFFLINE</b></button>
+        <div class="career-stat"><small>BALANCE</small><strong id="balance-value">$0</strong></div>
+        <div class="career-stat license"><small>LICENSE</small><strong id="license-value">—</strong></div>
+        <div class="date-control">
+          <div><small id="weekday-value">WEDNESDAY</small><strong id="date-value">11 MAR 2026</strong></div>
+          <button id="advance-time" type="button">ADVANCE 1 DAY <span>›</span></button>
+        </div>
+      </div>
+    </header>
+
+    <section class="page-shell">
+      <header class="page-heading" id="page-heading">
+        <div><span class="eyebrow" id="page-kicker">CAREER HUB</span><h1 id="page-title">Your road to the top starts here.</h1><p id="page-subtitle">Build reputation, protect the machinery and earn every opportunity.</p></div>
+        <div class="page-heading-actions" id="page-actions"></div>
+      </header>
+      <div id="view" class="view" aria-live="polite"></div>
+    </section>
+  </main>
+</div>
+<div id="modal-root"></div>
+<div id="intro-root" hidden></div>
+<div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+</body>
+</html>
