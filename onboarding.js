@@ -95,6 +95,10 @@
       </div>`,
       `<button class="intro-back" data-intro-action="back">BACK</button><button class="intro-next finish" data-intro-action="finish">ENTER THE PADDOCK <span>→</span></button>`);
   }
+  function driverInputActive() {
+    const active = document.activeElement;
+    return currentStep() === 4 && !!active && root.contains(active) && active.matches("#intro-driver-name, #intro-driver-country, #intro-driver-number");
+  }
   function render() {
     document.body.classList.remove("intro-pending");
     if (!visible()) {
@@ -159,12 +163,19 @@
     }
   });
   window.addEventListener("fbr:account", event => {
+    const previousUserId = account.user?.uid || null;
     account = event.detail;
     if (account.user && !E.state.onboarding.completed && currentStep() === 0) E.updateOnboarding({ step: 1 });
-    render();
+    const accountChanged = previousUserId !== (account.user?.uid || null);
+    if (accountChanged || !driverInputActive()) render();
   });
-  window.addEventListener("fbr:link-cloud", event => { link = event.detail || { online: false }; render(); });
+  window.addEventListener("fbr:link-cloud", event => {
+    link = event.detail || { online: false };
+    if (currentStep() === 2) render();
+  });
   window.addEventListener("fbr:open-onboarding", () => { manualOpen = true; render(); });
-  window.addEventListener("fbr:state", render);
+  window.addEventListener("fbr:state", () => {
+    if (!driverInputActive()) render();
+  });
   render();
 })();
