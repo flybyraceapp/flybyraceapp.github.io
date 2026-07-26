@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://flybyrace.com/sitemap.xml

@@ -1,10 +1,17 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="FlyByRace — the unofficial Automobilista 2 driver career">
-  <title>FlyByRace — Driver Career</title>
+  <meta name="description" content="FlyByRace is the unofficial Automobilista 2 career companion for persistent seasons, teams, vehicles and automated race sessions.">
+  <meta name="theme-color" content="#090c11">
+  <link rel="canonical" href="https://flybyrace.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FlyByRace">
+  <meta property="og:title" content="FlyByRace — AMS2 Driver Career">
+  <meta property="og:description" content="Start at the bottom, earn every licence and build a persistent Automobilista 2 racing career.">
+  <meta property="og:url" content="https://flybyrace.com/">
+  <title>FlyByRace — AMS2 Driver Career</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,6 +22,8 @@
   <script src="./data/career-content.js" defer></script>
   <script src="./data/career-rules.js" defer></script>
   <script src="./career-engine.js" defer></script>
+  <script src="./ads-config.js" defer></script>
+  <script src="./ads.js" defer></script>
   <script src="./firebase-service.js" defer></script>
   <script src="./pages-main.js" defer></script>
   <script src="./pages-career.js" defer></script>
@@ -79,6 +88,11 @@
         <div class="page-heading-actions" id="page-actions"></div>
       </header>
       <div id="view" class="view" aria-live="polite"></div>
+      <section class="fbr-ad-banner" id="fbr-ad-banner" aria-label="Advertisement" hidden>
+        <span>ADVERTISEMENT</span>
+        <div id="fbr-ad-mount"></div>
+      </section>
+      <footer class="site-legal"><a href="./privacy.html">Privacy &amp; advertising</a><span>flybyrace.com</span></footer>
     </section>
   </main>
 </div>
