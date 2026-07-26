@@ -235,7 +235,10 @@
         if (result.status === "completed") {
           clearTimeout(timeout);
           unsubscribe();
-          resolve({ ok: true, commandId, cloud: true, message: result.message || "Session ready" });
+          let payload = {};
+          try { payload = result.resultJson ? JSON.parse(result.resultJson) : {}; }
+          catch { payload = {}; }
+          resolve({ ...payload, ok: true, commandId, cloud: true, message: result.message || "Session ready" });
         }
         if (result.status === "failed") {
           clearTimeout(timeout);

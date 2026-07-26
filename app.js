@@ -18,7 +18,7 @@
     if(!inspection.cleared){toast('error',inspection.reason||'Vehicle failed scrutineering');raceModal(id);return}
     const session=sessionPayload(id);
     if(!session){toast('error','Session profile is unavailable');return}
-    modal(`<div class="launch-progress"><span class="section-kicker">FLYBYRACE LINK</span><h2>BUILDING RACE SERVER</h2><p>${session.layout} · ${session.className}</p><div class="launch-steps"><span class="active">1</span><strong>RESOLVE AMS2 CONTENT</strong><span>2</span><strong>START DEDICATED SERVER</strong><span>3</span><strong>LAUNCH GAME</strong></div><div class="launch-spinner"></div><small>Keep FlyByRace Link running. It owns the server and will close it when Link exits.</small></div>`);
+    modal(`<div class="launch-progress"><span class="section-kicker">FLYBYRACE LINK</span><h2>BUILDING RACE SERVER</h2><p>${session.layout} · ${session.className}</p><div class="launch-steps"><span class="active">1</span><strong>RESOLVE AMS2 CONTENT</strong><span>2</span><strong>START DEDICATED SERVER</strong><span>3</span><strong>PUBLISH ROOM</strong></div><div class="launch-spinner"></div><small>Keep FlyByRace Link running. It owns the server and will close it when Link exits.</small></div>`);
     try{
       let result;
       try{
@@ -30,11 +30,13 @@
         if(localError.linkResponded)throw localError;
         const cloud=window.FBR_FIREBASE;
         if(!cloud?.user||!cloud.link?.online||cloud.link.bridgeReady!==true)throw new Error('FlyByRace Link is not connected. Open the installed Link app and sign in with the same Google account.');
-        modal(`<div class="launch-progress"><span class="section-kicker">FIREBASE BRIDGE</span><h2>SENDING SESSION TO LINK</h2><p>${session.layout} · ${session.className}</p><div class="launch-steps"><span class="active">1</span><strong>COMMAND SENT</strong><span>2</span><strong>SERVER STARTING</strong><span>3</span><strong>AMS2 OPENING</strong></div><div class="launch-spinner"></div><small>The static web app is waiting for the installed Link app to confirm the room.</small></div>`);
+        modal(`<div class="launch-progress"><span class="section-kicker">FIREBASE BRIDGE</span><h2>SENDING SESSION TO LINK</h2><p>${session.layout} · ${session.className}</p><div class="launch-steps"><span class="active">1</span><strong>COMMAND SENT</strong><span>2</span><strong>SERVER STARTING</strong><span>3</span><strong>ROOM PUBLISHING</strong></div><div class="launch-spinner"></div><small>The static web app is waiting for the installed Link app to confirm the room.</small></div>`);
         result=await cloud.sendLinkCommand({type:'launch-session',eventId:session.id,sessionJson:JSON.stringify(session)});
       }
-      const resolved=result.resolved||{track:session.layout,vehicleClass:session.className};
-      modal(`<div class="launch-complete"><span class="launch-check">✓</span><span class="section-kicker">SERVER READY</span><h2>AMS2 IS OPENING</h2><p>${resolved.track||session.layout} · ${resolved.vehicleClass||session.className}</p><div class="warning-penalty"><strong>LOCAL RACE ROOM ACTIVE</strong><span>Join occurs through Sports Play at 127.0.0.1:27015.</span></div><button class="primary-action wide" data-action="close">CONTINUE</button></div>`);poll()
+      const resolved=result.resolved||{track:session.layout,vehicleClass:session.className},room=result.room||{};
+      if(!/^\d{6}$/.test(String(room.number||''))||!/^\d{6}$/.test(String(room.password||'')))throw new Error('FlyByRace Link v0.6.2 or newer is required for protected race rooms.');
+      const roomNumber=ctx.esc(room.number),roomPassword=ctx.esc(room.password),roomName=ctx.esc(room.name||('[FlyByRace] '+room.number));
+      modal(`<div class="launch-complete"><span class="launch-check">✓</span><span class="section-kicker">PROTECTED SERVER READY</span><h2>FIND YOUR RACE ROOM</h2><p>${resolved.track||session.layout} · ${resolved.vehicleClass||session.className}</p><div class="room-credentials"><article><small>SERVER FILTER</small><strong>${roomNumber}</strong><span>${roomName}</span></article><article><small>ROOM PASSWORD</small><strong>${roomPassword}</strong><span>6-DIGIT SESSION PASSWORD</span></article></div><div class="warning-penalty"><strong>NO AMS2 RESTART REQUIRED</strong><span>Open MULTIPLAYER → BROWSE, filter by ${roomNumber}, then enter the password above. The anonymous room name contains no account or driver information.</span></div><button class="primary-action wide" data-action="close">CONTINUE</button></div>`);poll()
     }catch(error){
       modal(`<div class="launch-failed"><span class="warning-mark">!</span><span class="section-kicker">LINK COULD NOT START THE ROOM</span><h2>SESSION LAUNCH FAILED</h2><p>${ctx.esc(error.message||'FlyByRace Link is offline')}</p><div class="warning-penalty"><strong>CHECK FLYBYRACE LINK</strong><span>Open FlyByRace Link, verify both AMS2 folders and confirm the same Google account is connected.</span></div><button class="primary-action wide" data-action="close">RETURN TO RACE CONTROL</button></div>`)
     }
